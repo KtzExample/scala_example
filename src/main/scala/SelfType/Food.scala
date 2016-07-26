@@ -31,10 +31,10 @@ trait RecipesComponent {
   }
 }
 
-abstract class DatabaseComponent extends FoodCategoriesComponent with FoodsComponent with RecipesComponent {
-  val database : Database
-  trait Database extends FoodCategories with Food with Recipes
-}
+//abstract class DatabaseComponent extends FoodCategoriesComponent with FoodsComponent with RecipesComponent {
+//  val database : Database
+//  trait Database extends FoodCategories with Food with Recipes
+//}
 
 trait SimpleFoodsComponents extends FoodsComponent with FoodCategoriesComponent{
   val foods = new Object with SimpleFoods
