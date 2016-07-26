@@ -71,8 +71,6 @@ trait SimpleRecipesComponent extends RecipesComponent {
     )
     def allRecipes = List(FruitSalad)
   }
-
-  def allRecipes = List(FruitSalad)
 }
 
 trait FoodCategoriesComponent {
