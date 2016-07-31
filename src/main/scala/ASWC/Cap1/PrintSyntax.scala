@@ -1,4 +1,4 @@
-package ASWC.Ex1_1_4
+package ASWC.Cap1
 
 /**
   * Created by ktz on 16. 7. 31.

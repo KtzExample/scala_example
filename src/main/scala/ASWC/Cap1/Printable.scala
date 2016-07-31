@@ -1,4 +1,4 @@
-package ASWC.Ex1_1_4
+package ASWC.Cap1
 
 /**
   * Created by ktz on 16. 7. 31.
@@ -13,5 +13,8 @@ object PrintDefaults {
   }
   implicit val stringPrintable = new Printable[String] {
     override def format(valueToString: String): String = valueToString
+  }
+  implicit val booleanPrintable = new Printable[Boolean] {
+    override def format(valueToString: Boolean): String = valueToString.toString
   }
 }
