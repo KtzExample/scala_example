@@ -20,9 +20,7 @@ class Sun2 extends Parent {
   override def hi: String = """Hi I`m Sun2"""
 }
 
-trait Wrapper[+A <: Parent] {
-  def sayHello[B <: Parent](value : B) : Unit = println(value.hello)
-  def sayHi[B <: Parent](value : B) : Unit = println(value.hi)
+trait Wrapper[+A] {
 }
 
 object Polymophism extends App {
@@ -36,6 +34,7 @@ object Polymophism extends App {
   sayHiNHello(sun1)
   sayHiNHello(sun2)
 
+  def hello(wrapper: Wrapper[Parent]) : Unit = {}
 
-
+  hello(new Wrapper[Sun1] {})
 }
