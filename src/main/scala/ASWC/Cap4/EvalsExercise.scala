@@ -40,18 +40,26 @@ object EvalsExercise extends App{
   println
   saying.value
 
+  println
+
   import cats.Monad
-  import cats.syntax.flatMap
+  import cats.syntax.flatMap._
   import scala.language.higherKinds
 
   def stackDepth : Int = Thread.currentThread().getStackTrace.length
 
-//  def loopM[M[_] : Monad](m : M[Int], count : Int) : M[Int] = {
-//    println(s"Stack depth $stackDepth")
-//    count match {
-//      case 0 => m
-//      case n => m.flatMap{_ => loopM(m, n -1)}
-//    }
-//  }
+  def loopM[M[_] : Monad](m : M[Int], count : Int) : M[Int] = {
+    println(s"Stack depth $stackDepth")
+    count match {
+      case 0 => m
+      case n => m.flatMap{_ => loopM(m, n -1)}
+    }
+  }
 
+  import cats.std.option._
+  import cats.syntax.option._
+
+  loopM(1.some, 5)
+  println
+  loopM(Eval.now(1), 5).value
 }
