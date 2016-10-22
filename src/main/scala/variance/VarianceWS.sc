@@ -15,5 +15,3 @@ def setGarbageCanForPlastic(gc : Garbage[PlasticItem]) : Unit = println(gc.toStr
 setGarbageCanForPlastic(new Garbage[PlasticItem])
 
 setGarbageCanForPlastic(new Garbage[Item])
-
-def PaperItemToItem(gc : Garbage[PaperItem]) : Garbage[Item] = gc
