@@ -9,6 +9,7 @@ libraryDependencies ++= {
   Seq(
     "org.typelevel" %% "cats" % CatsV,
     "org.scalactic" %% "scalactic" % "2.2.6",
-    "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+    "org.scalatest" %% "scalatest" % "2.2.6" % "test",
+    "com.github.mpilquist" %% "simulacrum" % "0.10.0"
   )
 }
