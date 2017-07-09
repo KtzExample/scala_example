@@ -1,4 +1,4 @@
-package org.example.ktz.hackerrank.Introduction
+package org.example.ktz.hackerrank.introduction
 
 /**
   * Created by knigh on 2017-07-09.

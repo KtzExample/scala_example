@@ -5,6 +5,9 @@ package org.example.ktz.hackerrank.recursion
   */
 object PascalsTriangle {
 
+  def printList[A](list: List[A]): String =
+    list.foldLeft(new StringBuilder)((stringBuilder, elem) => stringBuilder.append(s"$elem ")).toString().trim
+
   implicit class FactInt(n: Int) {
     def ! : Int = {
       def loop(n: Int, acc: Int): Int =
@@ -15,20 +18,19 @@ object PascalsTriangle {
     }
   }
 
-
   def getListOfRow(rowN: Int): List[Int] =
-    (1 :: (2 until rowN).map(index => rowN.! / (index.! * (rowN - index).!)).toList) :+ 1
+    (1 :: (1 until rowN).map(index => rowN.! / (index.! * (rowN - index).!)).toList) :+ 1
 
   def generatePascalList(n: Int, acc: List[List[Int]]): List[List[Int]] =
-    if(n == 1) List(List(1)) ++ acc
-    else if(n == 2) generatePascalList(n - 1, List(List(1, 2)) ++ acc)
+    if(n == 0) List(List(1)) ++ acc
+    else if(n == 1) generatePascalList(n - 1, List(List(1, 1)) ++ acc)
     else generatePascalList(n - 1, getListOfRow(n) :: acc)
 
   def printPascal(n: Int): Unit =
-    generatePascalList(n, List.empty).foreach(list => list.foreach())
+    generatePascalList(n - 1, List.empty).foreach(list => println(printList(list)))
 
 
   def main(args: Array[String]): Unit = {
-    println(5!)
+    printPascal(io.StdIn.readInt())
   }
 }
