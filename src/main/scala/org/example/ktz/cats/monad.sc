@@ -1,4 +1,5 @@
 import cats.Monad
+import cats.data.OptionT
 import cats.implicits._
 
 import scala.io.StdIn
@@ -53,13 +54,14 @@ implicit val consoleMonad = new Monad[ConsoleAction] {
     ReadFromConsole.asInstanceOf[ConsoleAction[A]]
 }
 
-//for {
-//  _ <- WriteToConsole("Write your name: ")
-//  name <- ReadFromConsole()
-//  _ <- WriteToConsole(s"Hello $name")
-//} yield ()
-//
-//
+import cats._
+import cats.implicits._
+
+Monad[Option].ifM(Option(true))(Option("truthy"), Option("falsy"))
+Monad[List].ifM(List(true, false, true))(List(1, 2), List(3, 4))
 
 
+case class OptionT[F[_], A](value: F[Option[A]])
 
+Foldable[List].foldMap(List("a", "b", "c"))(_.length)
+Foldable[List].foldMap(List(1, 2, 3))(_.toString)
