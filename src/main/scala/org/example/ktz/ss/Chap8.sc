@@ -52,12 +52,6 @@ list.foldLeft(10)(_ + _)   // 모든것을 더하고 + 10
 
 import scala._ // === import scala.*
 
-def printAll[A](a: A*): Unit = a.foreach(println)
-
-printAll(10, 11, 12, 13)
-printAll(list: _*)
-printAll(list)
-
 //8.6 부분 적용 함수
 
 list.foreach(ele => println(ele))
@@ -80,3 +74,64 @@ a.apply(1, 2, 3)
 
 val b = sum(1, _: Int, 3)
 b(10)
+
+
+// 8.7 클로져
+var more = 1
+
+val addMore = (n: Int) => n + more
+
+addMore(10)
+
+more = 2    // more가 바뀌면 아래도 바뀐다. -> 변수의 값을 갖는게(포획) 아닌, 변수 자체를 갖는다.
+
+addMore(10)
+
+var result = 0
+
+list.foreach(result += _)
+
+result    // 변수 바깥에도 영향을 준다.
+
+// 8.8 특별한 형태의 함수 호출
+def printAll[A](a: A*): Unit = a.foreach(println)
+
+printAll(10, 11, 12, 13)
+printAll(list: _*)
+printAll(list)
+
+def printSeq(a: Int*): Seq[Int] = a   // 분명 a는 Seq[Int]이다.
+
+//printSeq(Seq[Int](1,2,3,4))   // 그러나, Seq[Int]는 대입할 수 없다.
+
+case class Hello(a: Int, b: Int, c: Int)
+
+Hello(1,2,3).copy(c = 10)   // 변수이름으로 부분 적용할 수 있다.
+
+def default(n: Int = 10): Int = n + 1
+
+default()
+default(1)
+
+
+// 8.9 꼬리 재귀
+
+def addAllWhile(n: Int): List[Int] = {
+  var result: List[Int] = List.empty
+  var i = n
+  while (i > 0) {
+    result = result :+ i
+    i -= 1
+  }
+
+  result
+}
+
+@tailrec
+def addRecursion(n: Int, acc: List[Int] = List.empty): List[Int] =
+  if(n <= 0) acc
+  else addRecursion(n - 1, acc :+ n)
+
+addAllWhile(10)
+
+addRecursion(10)
