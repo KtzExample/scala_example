@@ -43,5 +43,14 @@ def Hi(a: A): Unit = println("")
 
 val b: B = _ => new IntSet {}
 
-Hi(b)
+//Hi(b)
 
+
+class Hello[+T] {
+  def insert[A >: T](ele: A): A = ele
+}
+
+
+val hello = new Hello[String]
+
+hello.insert(new Any)
