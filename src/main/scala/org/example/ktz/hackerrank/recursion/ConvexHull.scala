@@ -25,11 +25,17 @@ object ConvexHull {
   def sortByAngle(points: List[Point], pivot: Point): List[Point] =
     points.sortBy(point => pivot angleOf point)
 
-  def getPivot(points: List[Point]): Point = points.minBy(_.y)
+  def getPivot(points: List[Point]): Point = {
+    val minY: Point = points.minBy(_.y)
+    val minYList: List[Point] = points.filter(_.y == minY.y)
+
+    if(minYList.size > 1) minYList.minBy(_.x)
+    else minY
+  }
 
   def getConvexList(points: List[Point]): List[Point] = {
     def loop(points: List[Point], acc: List[Point]): List[Point] =
-      if(points.isEmpty) acc
+      if(points.isEmpty) acc.reverse
       else {
         if(points.head isLeftSideOf(acc.tail.head, acc.head)) loop(points.tail, points.head :: acc)
         else loop(points.tail, points.head :: acc.tail)
@@ -38,11 +44,11 @@ object ConvexHull {
     val pivot = getPivot(points)
     val pointsWithoutPivot = sortByAngle(points.filter(_ != pivot), pivot)
 
-    loop(pointsWithoutPivot.tail, pivot :: pointsWithoutPivot.head :: Nil)
+    loop(pointsWithoutPivot.tail, pointsWithoutPivot.head :: pivot :: Nil)
   }
 
   def getPerimeter(points: List[Point], first: Point, acc: Double = 0): Double =
-    if(points.length == 1) points.head distanceBetween first
+    if(points.length == 1) acc + (points.head distanceBetween first)
     else getPerimeter(points.tail, first, acc + points.head.distanceBetween(points.tail.head))
 
   def getConvexHullPerimeter(points: List[Point]): Double = {
