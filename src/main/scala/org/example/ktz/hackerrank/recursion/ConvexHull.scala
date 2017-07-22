@@ -1,5 +1,6 @@
 package org.example.ktz.hackerrank.recursion
 
+
 /**
   * Created by ktz on 17. 7. 17.
   */
@@ -8,10 +9,10 @@ object ConvexHull {
   case class Point(x: Int, y: Int) {
     import scala.math._
 
-    def angleOf(point: Point): Double = atan2(point.y - this.y, point.x - this.x)
+    def angleOf(point: Point): Double = abs(atan2(point.y - this.y, point.x - this.x) * 180 / Pi)
 
     def isLeftSideOf(from: Point, to: Point): Boolean =
-      ((to.x - from.x)*(this.y - from.y) - (this.x - from.x) * (to.y - from.y)) > 0
+    ((to.x - from.x)*(this.y - from.y) - (to.y - from.y) * (this.x - from.x)) > 0
 
     def distanceBetween(to: Point): Double = sqrt(pow(to.x - this.x, 2) + pow(to.y - this.y, 2))
 
@@ -35,13 +36,16 @@ object ConvexHull {
     else minY
   }
 
+  import scala.annotation.tailrec
+
   def getConvexList(points: List[Point]): List[Point] = {
+    @tailrec
     def loop(points: List[Point], acc: List[Point]): List[Point] =
-      if(points.isEmpty) acc.reverse
-      else {
-        if(points.head isLeftSideOf(acc.tail.head, acc.head)) loop(points.tail, points.head :: acc)
-        else loop(points.tail, points.head :: acc.tail)
-      }
+    if(points.isEmpty) acc.reverse
+    else {
+      if(points.head isLeftSideOf(acc.tail.head, acc.head)) loop(points.tail, points.head :: acc)
+      else loop(points.tail, points.head :: acc.tail)
+    }
 
     val pivot = getPivot(points)
     val pointsWithoutPivot = sortByAngle(points.filter(_ != pivot), pivot)
@@ -54,8 +58,13 @@ object ConvexHull {
     else getPerimeter(points.tail, first, acc + points.head.distanceBetween(points.tail.head))
 
   def getConvexHullPerimeter(points: List[Point]): Double = {
+    def loop(next: List[Point], before: List[Point]): List[Point] =
+      if(next.length == before.length) next
+      else loop(getConvexList(next), next)
+
     val convexList: List[Point] = getConvexList(points)
-    getPerimeter(convexList, convexList.head)
+    val result: List[Point] = loop(getConvexList(convexList), convexList)
+    getPerimeter(result, result.head)
   }
 
 
