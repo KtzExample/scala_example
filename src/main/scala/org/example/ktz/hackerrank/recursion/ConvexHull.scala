@@ -14,6 +14,8 @@ object ConvexHull {
       ((to.x - from.x)*(this.y - from.y) - (this.x - from.x) * (to.y - from.y)) > 0
 
     def distanceBetween(to: Point): Double = sqrt(pow(to.x - this.x, 2) + pow(to.y - this.y, 2))
+
+    override def toString: String = s"($x,$y)"
   }
   object Point {
     def apply(str: String): Point = {
