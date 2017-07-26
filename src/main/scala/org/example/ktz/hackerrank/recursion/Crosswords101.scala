@@ -52,3 +52,39 @@ object Crosswords101 {
   }
 }
 */
+
+object Crosswords101 {
+  val NumberOfColumn = 10
+  val NumberOfRaw = 10
+
+  case class WordNode(word: Option[String], wordLength: Int, crossWord: Map[Int, WordNode])
+
+  def splitWord(): List[String] = io.StdIn.readLine().split(";").toList
+
+  def extractSpace(canvas: List[List[Char]]): WordNode = ???
+
+  def makeWordTree(words: List[String], wordTree: WordNode): WordNode =
+    words.foldLeft(wordTree)((tree, word) => positioningWord(word, tree))
+
+  def positioningWord(word: String, wordTree: WordNode): WordNode = ???
+
+  def fillWord(canvas: List[List[Char]], wordTree: WordNode): List[Char] = ???
+
+  def printCanvas(canvas: List[Char]): String = ???
+
+  def main(args: Array[String]): Unit = {
+    def readInput(n: Int, acc: List[List[Char]] = List.empty): List[List[Char]] =
+      if(n == 0) acc
+      else readInput(n - 1, acc :+ io.StdIn.readLine().toList)
+
+    val input: List[List[Char]] = readInput(NumberOfRaw)
+
+    val words: List[String] = splitWord()
+
+    val wordTree: WordNode = makeWordTree(words, extractSpace(input))
+
+    val result = fillWord(input, wordTree)
+
+    println(printCanvas(result))
+  }
+}
