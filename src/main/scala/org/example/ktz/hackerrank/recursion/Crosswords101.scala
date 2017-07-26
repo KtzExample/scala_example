@@ -1,5 +1,5 @@
 package org.example.ktz.hackerrank.recursion
-
+/*
 object Crosswords101 {
 
   case class RichChar(char: Option[Char], x: Int, y: Int)
@@ -51,3 +51,4 @@ object Crosswords101 {
 
   }
 }
+*/
