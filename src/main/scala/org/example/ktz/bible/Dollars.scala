@@ -6,4 +6,9 @@ object Chap11 extends App{
   }
 
   val dollars: Dollars = new Dollars(1000)
+
+  val a: String = new String("Hello")
+  val b: String = new String("Hello")
+
+  println(a.eq(b))
 }
