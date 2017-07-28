@@ -6,3 +6,5 @@ val chars: List[Char] = List('a', 'b', 'c')
 
 (ints |@| chars).tupled
 (chars |@| ints).tupled
+
+(ints |@| chars).map(_ + _.toString)
