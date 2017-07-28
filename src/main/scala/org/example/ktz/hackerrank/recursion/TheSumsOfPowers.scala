@@ -10,11 +10,17 @@ object TheSumsOfPowers {
     if(math.pow(result + 1, N) > X) result
     else maxSquare(X, N, result + 1)
 
+  def takeN(elementList: List[Int], n: Int): List[List[Int]] = List.fill(n)(elementList)  // TODO 이거 아직 안 끝남!!
+
+
   def makePowerSet(elementList: List[Int]): List[List[Int]] = {
     @tailrec
-    def pwr(t: List[Int], ps: List[List[Int]]): List[List[Int]] =
-      if (t.isEmpty) ps
-      else pwr(t.tail, ps ++ (ps map (_ :+ t.head)))
+    def pwr(elementList: List[Int], powerSet: List[List[Int]]): List[List[Int]] =
+      if (elementList.isEmpty) powerSet
+      else pwr(elementList.tail, powerSet ++ (powerSet map (_ :+ elementList.head)))
+
+    val list = takeN(elementList, 3)
+
 
     pwr(elementList, List(List.empty))
   }
