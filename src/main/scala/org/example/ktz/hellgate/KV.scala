@@ -1,7 +1,7 @@
 import java.util.Date
 
 import cats.free.Free
-import cats.~>
+import cats.{Monad, ~>}
 
 import scala.collection.mutable
 
@@ -11,7 +11,7 @@ case class Get[T](key: String) extends KVStoreA[Option[T]]
 case class Delete(key: String) extends KVStoreA[Unit]
 case class Gets[T](key: List[String]) extends KVStoreA[List[T]]
 
-object kv {
+object KV extends App{
   type KVStore[A] = Free[KVStoreA, A]
 
   import cats.free.Free.liftF
@@ -50,20 +50,49 @@ object kv {
       override def apply[T](fa: KVStoreA[T]) = fa match {
         case Put(key: String, value: T) =>
           kvs.put(key, value)
-          println("Put")
           ()
         case Get(key: String) =>
-          println("Get")
           kvs.get(key).map(_.asInstanceOf[T])
         case Delete(key) =>
           kvs.remove(key)
-          println("Delete")
           ()
+      }
+    }
+
+  import scala.concurrent.ExecutionContext.Implicits.global
+  import scala.concurrent.Future
+  import cats.implicits._
+  import scala.concurrent.Await
+  import scala.concurrent.duration._
+
+
+  def futureCompiler[M[_] : Monad]: KVStoreA ~> M =
+    new(KVStoreA ~> M) {
+      println("new transformer" + new Date)
+      val kvs = mutable.Map.empty[String, Any]
+
+      override def apply[T](fa: KVStoreA[T]) = fa match {
+        case Put(key: String, value: T) =>
+          Monad[M].pure {
+            kvs.put(key, value)
+            ()
+          }
+        case Get(key: String) =>
+          Monad[M].pure(kvs.get(key).map(_.asInstanceOf[T]))
+        case Delete(key) =>
+          Monad[M].pure {
+            kvs.remove(key)
+            ()
+          }
       }
     }
 
   private val result: Option[Int] = program.foldMap(impureCompiler)
 
   println(result.get)
+
+  private val mResult: Future[Option[Int]] = program.foldMap(futureCompiler[Future])
+
+  println(Await.result(mResult, 10 second))
 }
 
