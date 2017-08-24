@@ -70,3 +70,41 @@ implicitly[CsvEncoder[Chap3IceCream]]
 import shapeless._
 
 the[CsvEncoder[Chap3IceCream]]
+
+implicit val boolEncoder: CsvEncoder[Boolean] =
+  new CsvEncoder[Boolean] {
+    override def encode(value: Boolean): List[String] =
+      if(value) List("yes")
+      else List("no")
+  }
+
+def createEncoder[A](func: A => List[String]): CsvEncoder[A] =
+  new CsvEncoder[A] {
+    override def encode(value: A): List[String] = func(value)
+  }
+
+implicit val stringEncoder: CsvEncoder[String] =
+  createEncoder(str => List(str))
+
+implicit val intEncoder: CsvEncoder[Int] =
+  createEncoder(num => List(num.toString))
+
+implicit val booleanEncoder: CsvEncoder[Boolean] =
+  createEncoder(b => if(b) List("yes") else List("no"))
+
+implicit val hlistEncoder: CsvEncoder[HNil] =
+  createEncoder(hnil => Nil)
+
+implicit def hlistEncoder[H, T <: HList](
+  implicit hEncoder: CsvEncoder[H],
+  tEncoder: CsvEncoder[T]
+): CsvEncoder[H :: T] =
+  createEncoder {
+    case h :: t =>
+      hEncoder.encode(h) ++ tEncoder.encode(t)
+  }
+
+val reprEncoder: CsvEncoder[String :: Int :: Boolean :: HNil] =
+  implicitly
+
+reprEncoder.encode("abc" :: 123 :: true :: HNil)
