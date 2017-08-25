@@ -9,9 +9,6 @@ class TypeLevelSelector {
 object test extends App{
   val a = 1 :: "hello" :: true :: HNil
 
-//  val result = a.at(Succ[Succ[Zero]])
-
-//  println(result)
   import ToInt._
   println(ToInt[Succ[Succ[Zero]]])
 }
@@ -40,19 +37,8 @@ sealed trait  ToInt[N <: Nat] {
 }
 
 object ToInt {
-//
-//  def apply[N <: Nat](implicit toInt: ToInt[N]): ToInt[N] = new ToInt[N] {
-//    override val value: Int = toInt.value
-//  }
-//
-//  implicit def zero(implicit zero: ToInt[Zero]): ToInt[Zero] = new ToInt[Zero] {
-//    override val value: Int = 0
-//  }
-//
-//  implicit def base[N <: Nat](implicit nat: ToInt[Succ[N]]): ToInt[N] = new ToInt[N] {
-//    override val value: Int = nat.value - 1
-//  }
 
+  // Base Class
   implicit def zero: ToInt[Zero] = new ToInt[Zero] {
     override val value: Int = 0
   }
