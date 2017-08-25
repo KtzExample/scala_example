@@ -57,6 +57,8 @@ object ToInt {
     override val value: Int = 0
   }
 
+  // Implicit Conversion은 Output 기준이다.
+
   implicit def foo[N <: Nat](implicit Z: ToInt[N]): ToInt[Succ[N]] = new ToInt[Succ[N]] {
     override val value: Int = Z.value + 1
   }
