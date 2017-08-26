@@ -6,7 +6,7 @@ class TypeLevelSelector {
 
 }
 
-object test extends App{
+object test extends App {
   val a = 1 :: "hello" :: true :: HNil
 
   import ToInt._
