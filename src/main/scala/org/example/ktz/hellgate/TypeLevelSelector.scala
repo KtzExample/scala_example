@@ -1,6 +1,6 @@
 package org.example.ktz.hellgate
 
-import shapeless.HNil
+import shapeless._
 
 class TypeLevelSelector {
 
@@ -53,4 +53,25 @@ object ToInt {
   def apply[N <: Nat](implicit z: ToInt[N]): Int = z.value
 
   type Four = Succ[Succ[Succ[Succ[Zero]]]]
+}
+
+trait Nther[L <: HList, N <: Nat] {
+  type Out
+  def apply(self: L): Out
+}
+
+object Nther {
+  type AUX[L <: HList, N <: Nat, R] = Nther[L, N]{type Out = R}
+
+  def findNil[R, List <: R :: HList, IndexZero <: Zero](): AUX[List, IndexZero, R] =
+    new Nther[List, IndexZero] {
+      type Out = R
+      def apply(self: List): R = self.head
+    }
+
+  def unwrapHList[T, List <: HList, Index <: Nat](implicit hlist: Nther[List, Index]): AUX[T :: List, Succ[Index], hlist.Out] =
+    new Nther[T :: List, Succ[Index]] {
+      type Out = hlist.Out
+      def apply(self: T :: List): Out = hlist.apply(self.tail)
+    }
 }
