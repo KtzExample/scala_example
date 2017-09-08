@@ -19,7 +19,3 @@ val second2 = Second[String :: Int :: Boolean :: HNil]
 
 second1("foo" :: true :: 123 :: HNil)
 second2("foo" :: 321 :: false :: HNil)
-
-import RectUtil.lastField
-
-lastField(Rect(Vec(1, 2), Vec(3, 4)))

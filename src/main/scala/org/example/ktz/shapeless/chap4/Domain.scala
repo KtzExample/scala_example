@@ -31,6 +31,4 @@ object RectUtil extends App{
   ): last.Out = {
     last.apply(gen.to(input))
   }
-
-  lastField(Rect(Vec(1, 2), Vec(3, 4)))
 }
