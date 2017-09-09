@@ -1,11 +1,12 @@
-import shapeless.tag
-import shapeless.tag.@@
-
 val userId: Long = 12
 val deviceUuid: Long = 1234
 val carSerialId: Long = 12345
 
-def getHashCode(userId: Long, deviceUuid: Long, carSerialId: Long): String = {
+def getHashCode(
+ userId: Long,
+ deviceUuid: Long,
+ carSerialId: Long
+): String = {
   val userIdPlus: Long = userId + 1
   val deviceUuidPlus: Long = deviceUuid + 2
   val carSerialIdPlus: Long = carSerialId + 3
@@ -16,6 +17,28 @@ getHashCode(userId, deviceUuid, carSerialId) // Right Answer = res0: String = 13
 
 getHashCode(deviceUuid, userId, carSerialId) // Wrong Answer = res1: String = 1235-14-12348
 
+// Lets do it by case class
+case class UserIdCaseClass(userId: Long)
+case class DeviceUuidCaseClass(deviceUuid: Long)
+case class CarSerialIdCaseClass(carSerialId: Long)
+
+def getHashCodeCaseClass(
+  userIdCaseClass: UserIdCaseClass,
+  deviceUuidCaseClass: DeviceUuidCaseClass,
+  carSerialIdCaseClass: CarSerialIdCaseClass
+): String = {
+  val userIdPlus: Long = userIdCaseClass.userId + 1
+  val deviceUuidPlus: Long = deviceUuidCaseClass.deviceUuid + 2
+  val carSerialIdPlus: Long = carSerialIdCaseClass.carSerialId + 3
+  s"$userIdPlus-$deviceUuidPlus-$carSerialIdPlus"
+}
+
+getHashCodeCaseClass(UserIdCaseClass(userId), DeviceUuidCaseClass(deviceUuid), CarSerialIdCaseClass(carSerialId)) // Right Answer = res2: String = 13-1236-12348
+//getHashCodeCaseClass(DeviceUuidCaseClass(deviceUuid), UserIdCaseClass(userId), CarSerialIdCaseClass(carSerialId)) // Not Even Compiled!
+
+import shapeless.tag
+import shapeless.tag.@@
+
 trait UserIdTag
 trait DeviceUuidTag
 trait CarSerialIdTag
@@ -24,7 +47,11 @@ type UserId = Long @@ UserIdTag
 type DeviceUuid = Long @@ DeviceUuidTag
 type CarSerialId = Long @@ CarSerialIdTag
 
-def getHashCodeTagged(userId: UserId, deviceUuid: DeviceUuid, carSerialId: CarSerialId): String = {
+def getHashCodeTagged(
+ userId: UserId,
+ deviceUuid: DeviceUuid,
+ carSerialId: CarSerialId
+): String = {
   val userIdPlus: Long = userId + 1
   val deviceUuidPlus: Long = deviceUuid + 2
   val carSerialIdPlus: Long = carSerialId + 3
@@ -40,13 +67,14 @@ getHashCodeTagged(taggedUserId, taggedDeviceUuid, taggedCarSerialId) // Right An
 
 
 // Can't Override
-
 def getId(userId: UserId): Long = userId + 1
 //def getId(deviceUuid: DeviceUuid): Long = deviceUuid + 2      // Not Compiled because tagged type erased after compile
 //def getId(carSerialId: CarSerialId): Long = carSerialId + 3   // Not Compiled because tagged type erased after compile
 
 // Let's do by either
-def getUserIdOrDeviceIdOrCarSerialId(id: Either[UserId, Either[DeviceUuid, CarSerialId]]): Long = id match {
+def getUserIdOrDeviceIdOrCarSerialId(
+ id: Either[UserId, Either[DeviceUuid, CarSerialId]]
+): Long = id match {
   case Left(userId) => userId + 1
   case Right(Left(deviceUuid)) => deviceUuid + 2
   case Right(Right(carSerialId)) => carSerialId + 3
