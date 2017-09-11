@@ -5,14 +5,15 @@ version := "1.0"
 scalaVersion := "2.12.3"
 
 libraryDependencies ++= {
-  val CatsV = "0.9.0"
-  val MonixV = "2.3.0"
+  val CatsV = "1.0.0-MF"
+  val MonixV = "3.0.0-22bf9c6"
   val shapelessV = "2.3.2"
   Seq(
     "com.chuusai" %% "shapeless" % shapelessV,
-    "org.typelevel" %% "cats" % CatsV,
+    "org.typelevel" %% "cats-core" % CatsV,
+    "org.typelevel" %% "cats-free" % CatsV,
+    "org.typelevel" %% "cats-effect" % "0.4",
     "io.monix" %% "monix" % MonixV,
-    "io.monix" %% "monix-cats" % MonixV,
     "org.scalactic" %% "scalactic" % "3.0.1",
     "org.scalatest" %% "scalatest" % "3.0.1" % "test"
   )
