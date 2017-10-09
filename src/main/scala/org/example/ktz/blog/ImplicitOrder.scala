@@ -1,7 +1,7 @@
 package org.example.ktz.blog
 
 object ImplicitOrder extends App{
-  implicit val implicitIntInstance1: Instance[String] = Instance("Inside Instance")
+  implicit val implicitIntInstance1: Instance[String] = Instance("Implicit Instance in Same Conjure")
 
   def getString(implicit implicitInstance: Instance[String]): String = implicitInstance.value
 
@@ -12,9 +12,9 @@ object ImplicitOrder extends App{
 case class Instance[T](value: T)
 
 object Instance {
-  implicit val implicitIntInstance1: Instance[String] = Instance("Inner Instance")
+  implicit val implicitIntInstance1: Instance[String] = Instance("Implicit Instance in Companion Object")
 }
 
 object Imported {
-  implicit val implicitIntInstance1: Instance[String] = Instance("Imported Instance")
+  implicit val implicitIntInstance1: Instance[String] = Instance("Implicit Instance in imported")
 }
