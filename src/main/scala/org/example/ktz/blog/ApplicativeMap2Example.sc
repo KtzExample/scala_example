@@ -2,7 +2,6 @@ import java.time.Instant
 
 import cats.Applicative
 import cats.implicits._
-import com.sun.net.httpserver.Authenticator.Success
 
 import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global

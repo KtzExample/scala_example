@@ -17,12 +17,6 @@ class EnchantedDoor(
   override val room1: Int,
   override val room2: Int,
   override protected val isOpened: Boolean = false
-) extends Door {
+) extends Door[EnchantedRoom, Maze[EnchantedRoom]] {
   override def Enter(): Unit = println("It's Enchanted Door!")
-}
-
-class EnchantedMaze(override protected val rooms: Map[Int, Room] = Map.empty ) extends Maze {
-  override def RoomNo(roomNo: Int): Option[Room] = rooms.get(roomNo)
-
-  override def AddRoom(room: Room): EnchantedMaze = new EnchantedMaze(rooms + (room.roomNo -> room))
 }

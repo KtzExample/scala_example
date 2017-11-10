@@ -1,12 +1,12 @@
 package org.example.ktz.gof.chap3.absctractfactory
 
-import org.example.ktz.gof.chap3.{EnchantedDoor, EnchantedMaze, EnchantedRoom, EnchantedWall}
+import org.example.ktz.gof.chap3.{EnchantedDoor, EnchantedRoom, EnchantedWall, Maze}
 
-class EnchantedMazeFactory extends MazeFactory {
+class EnchantedMazeFactory extends MazeFactory[EnchantedRoom, EnchantedWall, EnchantedDoor] {
   implicit val spell: String = "Hello World!"
 
 
-  override def MakeMaze(): EnchantedMaze = new EnchantedMaze
+  override def MakeMaze(): Maze[EnchantedRoom] = new Maze[EnchantedRoom] {}
 
   override def MakeWall(): EnchantedWall = new EnchantedWall()
 

@@ -20,13 +20,7 @@ class StandardDoor(
   val room1: Int,
   val room2: Int,
   override protected val isOpened: Boolean = false
-) extends Door {
+) extends Door[StandardRoom, Maze[StandardRoom]] {
 
   override def Enter(): Unit = println("It's Standard Door!")
-}
-
-class StandardMaze(
-  override protected val rooms: Map[Int, Room] = Map.empty
-) extends Maze {
-  override def AddRoom(room: Room) = new StandardMaze(rooms + (room.roomNo -> room))
 }

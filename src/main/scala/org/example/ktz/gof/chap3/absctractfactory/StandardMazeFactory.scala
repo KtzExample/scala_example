@@ -2,8 +2,8 @@ package org.example.ktz.gof.chap3.absctractfactory
 
 import org.example.ktz.gof.chap3._
 
-class StandardMazeFactory extends MazeFactory {
-  def MakeMaze(): StandardMaze = new StandardMaze()
+class StandardMazeFactory extends MazeFactory[StandardRoom, StandardWall, StandardDoor] {
+  def MakeMaze(): Maze[StandardRoom] = new Maze[StandardRoom] {}
 
 
   def MakeWall(): StandardWall = new StandardWall

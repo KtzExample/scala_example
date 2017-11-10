@@ -8,7 +8,7 @@ trait Room extends MapSite {
 
   def GetSide(direction: Direction): Option[MapSite] = sides.get(direction)
 
-  def SetSide(direction: Direction, mapSite: MapSite): Room
+  def SetSide[RoomT <: Room](direction: Direction, mapSite: MapSite): RoomT
 
   override def Enter(): Unit = println("Entering Room")
 }
@@ -17,21 +17,25 @@ trait Wall extends MapSite {
   override def Enter(): Unit = print("It's Wall!")
 }
 
-trait Door extends MapSite {
+trait Door[RoomT <: Room, MazeT <: Maze[RoomT]] extends MapSite {
   val room1: Int
   val room2: Int
   protected val isOpened: Boolean = false
 
-  def OtherSideFrom(room: Room)(implicit maze: Maze): Room =
+  def OtherSideFrom(room: RoomT)(implicit maze: MazeT): RoomT =
     if(room.roomNo == room1) maze.RoomNo(room2).get else maze.RoomNo(room1).get
 
   override def Enter(): Unit = println("It's Door!")
 }
 
-trait Maze {
-  protected val rooms: Map[Int, Room] = Map.empty
+trait Maze[RoomT <: Room] {
+  protected var rooms: Map[Int, RoomT] = Map.empty
 
-  def AddRoom(room: Room): Maze
+  def AddRoom(room: RoomT): Maze[RoomT] =  {
+    rooms += room.roomNo -> room
 
-  def RoomNo(roomNo: Int): Option[Room] = rooms.get(roomNo)
+    this
+  }
+
+  def RoomNo(roomNo: Int): Option[RoomT] = rooms.get(roomNo)
 }
