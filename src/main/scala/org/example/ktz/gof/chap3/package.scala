@@ -6,8 +6,4 @@ package object chap3 {
   object South extends Direction
   object East extends Direction
   object West extends Direction
-
-  trait MapSite {
-    def Enter(): Unit
-  }
 }
