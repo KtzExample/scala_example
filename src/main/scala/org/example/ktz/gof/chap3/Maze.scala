@@ -75,13 +75,8 @@ object ActionOperator {
 
 case class Spell(spell: String)
 
-sealed trait GameType {
-  def getGameType: String
-}
+sealed trait GameType
 
-trait Standard extends GameType {
-  def getGameType: String = "Standard"
-}
-trait Enchanted extends GameType {
-  def getGameType: String = "Enchanted"
-}
+trait Standard extends GameType
+
+trait Enchanted extends GameType
