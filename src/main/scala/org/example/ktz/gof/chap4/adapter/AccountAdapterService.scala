@@ -1,12 +1,12 @@
-package org.example.ktz.gof.chap4
+package org.example.ktz.gof.chap4.adapter
 
+import org.example.ktz.gof.chap4.AccountInfoDto
 import org.example.ktz.gof.chap4.AccountInfoDto.UserId
-import org.example.ktz.gof.chap4.adapter.RepositoryAdapter
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
-class AccountService(
+class AccountAdapterService(
   cacheRepository: RepositoryAdapter,
   dbRepository: RepositoryAdapter
 ) {
