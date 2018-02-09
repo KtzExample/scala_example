@@ -15,7 +15,10 @@ libraryDependencies ++= {
     "org.typelevel" %% "cats-effect" % "0.4",
     "io.monix" %% "monix" % MonixV,
     "org.scalactic" %% "scalactic" % "3.0.1",
-    "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+    "org.scalatest" %% "scalatest" % "3.0.1" % "test",
+    "com.github.julien-truffaut" %%  "monocle-core"  % "1.5.0-cats",
+    "com.github.julien-truffaut" %%  "monocle-macro" % "1.5.0-cats",
+    "com.github.julien-truffaut" %%  "monocle-law"   % "1.5.0-cats" % "test"
   )
 }
 
