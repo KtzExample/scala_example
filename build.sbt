@@ -5,7 +5,7 @@ version := "1.0"
 scalaVersion := "2.12.3"
 
 libraryDependencies ++= {
-  val CatsV = "1.0.0-MF"
+  val CatsV = "1.0.1"
   val MonixV = "3.0.0-22bf9c6"
   val shapelessV = "2.3.2"
   Seq(

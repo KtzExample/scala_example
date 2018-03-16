@@ -2,6 +2,7 @@ package org.example.ktz.neo.cats
 
 import cats.Monoid
 import cats.syntax.all._
+import cats.implicits._
 import monocle.Fold
 
 object MonoidInstance extends App {
@@ -29,11 +30,11 @@ object MonoidInstance extends App {
 //    override def combine(x: Int, y: Int): Int = x * y
 //  }
 
-  import cats.instances.option._
-  val optionA = 1.some
-  val optionB = 2.some
+//  import cats.instances.option._
+//  val optionA = 1.some
+//  val optionB = 2.some
 
-  optionA <+> optionB
+//  optionA <+> optionB
 
-  println(10 |+| 20)
+//  println(10 |+| 20)
 }
