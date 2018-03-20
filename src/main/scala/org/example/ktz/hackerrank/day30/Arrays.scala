@@ -1,8 +1,8 @@
 package org.example.ktz.hackerrank.day30
 
 object Arrays extends App{
-  val nInput: Int = io.StdIn.readInt()
-  val arrayInput: List[Int] = io.StdIn.readLine().split(" ").map(_.toInt).toList
+  val nInput: Int = scala.io.StdIn.readInt()
+  val arrayInput: List[Int] = scala.io.StdIn.readLine().split(" ").map(_.toInt).toList
 
   assert(nInput == arrayInput.length)
 

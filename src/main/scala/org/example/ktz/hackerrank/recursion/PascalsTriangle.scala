@@ -31,6 +31,6 @@ object PascalsTriangle {
 
 
   def main(args: Array[String]): Unit = {
-    printPascal(io.StdIn.readInt())
+    printPascal(scala.io.StdIn.readInt())
   }
 }

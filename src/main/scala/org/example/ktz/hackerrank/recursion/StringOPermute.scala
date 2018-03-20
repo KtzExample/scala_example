@@ -13,9 +13,9 @@ object StringOPermute {
     }
 
   def main(args: Array[String]): Unit = {
-    val nOfTry: Int = io.StdIn.readInt()
+    val nOfTry: Int = scala.io.StdIn.readInt()
     (0 until nOfTry) foreach { _ =>
-      val input = io.StdIn.readLine()
+      val input = scala.io.StdIn.readLine()
       println(swapString(StringBuilder.newBuilder.append(input)).mkString)
     }
   }

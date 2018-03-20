@@ -71,8 +71,8 @@ object ConvexHull {
   def main(args: Array[String]) {
     def getInput(n: Int, acc: List[Point] = List.empty): List[Point] =
       if(n <= 0) acc
-      else getInput(n - 1, Point(io.StdIn.readLine()) :: acc)
+      else getInput(n - 1, Point(scala.io.StdIn.readLine()) :: acc)
 
-    println(getConvexHullPerimeter(getInput(io.StdIn.readInt())))
+    println(getConvexHullPerimeter(getInput(scala.io.StdIn.readInt())))
   }
 }

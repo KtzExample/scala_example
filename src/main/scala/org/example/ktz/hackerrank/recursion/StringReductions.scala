@@ -8,7 +8,7 @@ object StringReductions {
 
 
   def main(args: Array[String]): Unit = {
-    val input = io.StdIn.readLine()
+    val input = scala.io.StdIn.readLine()
     println(reduceString(input))
   }
 }

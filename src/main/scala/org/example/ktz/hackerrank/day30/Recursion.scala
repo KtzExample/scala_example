@@ -6,7 +6,7 @@ object Recursion extends App{
     if(n == 1) acc
     else n * factorial(n - 1, acc)
 
-  val result: Int = factorial(io.StdIn.readInt())
+  val result: Int = factorial(scala.io.StdIn.readInt())
 
   println(result)
 

@@ -4,7 +4,7 @@ object RunningTimeAndComplexity extends App {
 
   def readNumbers(n: Int, acc: List[Int] = List.empty): List[Int] =
     if(n == 0) acc
-    else readNumbers(n - 1, acc :+ io.StdIn.readInt())
+    else readNumbers(n - 1, acc :+ scala.io.StdIn.readInt())
 
   def getPrime(nextNum: Int, arr: List[Either[Boolean, Int]]): List[Boolean] =
     if(arr.forall(_.isLeft))
@@ -22,7 +22,7 @@ object RunningTimeAndComplexity extends App {
             Right(num)
       })
 
-  val nInput: Int = io.StdIn.readInt()
+  val nInput: Int = scala.io.StdIn.readInt()
   val numbers: List[Int] = readNumbers(nInput)
 
 

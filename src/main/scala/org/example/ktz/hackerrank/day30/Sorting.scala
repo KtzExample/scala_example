@@ -22,8 +22,8 @@ object Sorting extends App {
   }
 
 
-  val nTry: Int = io.StdIn.readInt()
-  val unSortedList: List[Int] = io.StdIn.readLine().split(" ").map(_.toInt).toList
+  val nTry: Int = scala.io.StdIn.readInt()
+  val unSortedList: List[Int] = scala.io.StdIn.readLine().split(" ").map(_.toInt).toList
 
   val (sortedList, nSortedTime) = sort(unSortedList)
   println(s"Array is sorted in $nSortedTime swaps.\n" +

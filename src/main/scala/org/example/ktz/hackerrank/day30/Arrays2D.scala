@@ -7,7 +7,7 @@ object Arrays2D extends App{
 
   def getInput(nInput: Int = 6, acc: List[List[Int]] = List.empty): List[List[Int]] =
     if(nInput == 0) acc.reverse
-    else getInput(nInput - 1, io.StdIn.readLine().split(" ").map(_.toInt).toList :: acc)
+    else getInput(nInput - 1, scala.io.StdIn.readLine().split(" ").map(_.toInt).toList :: acc)
 
   def getHourglassesSum(x: Int, y: Int, canvas: List[List[Int]]): Int =
     if(x + 2 >= length || y + 2 >= length) 0

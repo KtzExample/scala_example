@@ -1,8 +1,8 @@
 package org.example.ktz.hackerrank
 
 object Quartiles extends App{
-  val nInput: Int = io.StdIn.readInt()
-  val nList: List[Int] = io.StdIn.readLine().split(" ").map(_.toInt).toList.sorted
+  val nInput: Int = scala.io.StdIn.readInt()
+  val nList: List[Int] = scala.io.StdIn.readLine().split(" ").map(_.toInt).toList.sorted
 
   private def isOdd(list: List[Int]): Boolean = list.length % 2 == 1
 

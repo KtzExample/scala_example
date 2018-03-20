@@ -6,7 +6,7 @@ object DataTypes {
     val d = 4.0
     val s = "HackerRank "
 
-    val (i2, d2, s2) = (io.StdIn.readInt(), io.StdIn.readDouble(), io.StdIn.readLine())
+    val (i2, d2, s2) = (scala.io.StdIn.readInt(), scala.io.StdIn.readDouble(), scala.io.StdIn.readLine())
 
     println(i + i2)
     println(d + d2)

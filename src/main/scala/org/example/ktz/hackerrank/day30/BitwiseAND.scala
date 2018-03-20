@@ -1,12 +1,12 @@
 package org.example.ktz.hackerrank.day30
 
 object BitwiseAND extends App {
-  val nInput: Int = io.StdIn.readInt()
+  val nInput: Int = scala.io.StdIn.readInt()
 
   def getInput(nInput: Int, acc: List[(Int, Int)] = Nil): List[(Int, Int)] =
     if(nInput == 0) acc
     else {
-      val input: List[Int] = io.StdIn.readLine().split(" ").toList.map(_.toInt)
+      val input: List[Int] = scala.io.StdIn.readLine().split(" ").toList.map(_.toInt)
       getInput(nInput - 1, acc :+ (input.head -> input.tail.head))
     }
 

@@ -13,9 +13,9 @@ object RegEx extends App {
 
   def getInput(n: Int, acc: List[Person] = Nil): List[Person] =
     if(n == 0) acc.sortWith(_.name < _.name)
-    else getInput(n - 1, Person(io.StdIn.readLine()) :: acc)
+    else getInput(n - 1, Person(scala.io.StdIn.readLine()) :: acc)
 
-  val nInput: Int = io.StdIn.readInt()
+  val nInput: Int = scala.io.StdIn.readInt()
 
   getInput(nInput).filter(_.account == "gmail.com").map(_.name).foreach(println)
 }

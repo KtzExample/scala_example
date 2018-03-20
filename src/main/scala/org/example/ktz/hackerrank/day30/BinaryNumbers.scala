@@ -17,6 +17,6 @@ object BinaryNumbers extends App{
     }
 
 
-  println(getBinary(io.StdIn.readInt()))
+  println(getBinary(scala.io.StdIn.readInt()))
 
 }

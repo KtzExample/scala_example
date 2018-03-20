@@ -30,6 +30,6 @@ object TheSumsOfPowers {
   }
 
   def main(args: Array[String]) {
-    println(numberOfWays(io.StdIn.readInt(),io.StdIn.readInt()))
+    println(numberOfWays(scala.io.StdIn.readInt(),scala.io.StdIn.readInt()))
   }
 }

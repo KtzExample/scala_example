@@ -10,8 +10,8 @@ object NestedLogic extends App {
     def apply(input: Array[Int]): ReturnDate = ReturnDate(input(2), input(1), input.head)
   }
 
-  val actualReturned: ReturnDate = ReturnDate(io.StdIn.readLine().split(" ").map(_.toInt))
-  val expectedReturned: ReturnDate = ReturnDate(io.StdIn.readLine().split(" ").map(_.toInt))
+  val actualReturned: ReturnDate = ReturnDate(scala.io.StdIn.readLine().split(" ").map(_.toInt))
+  val expectedReturned: ReturnDate = ReturnDate(scala.io.StdIn.readLine().split(" ").map(_.toInt))
 
   val fine: Int = actualReturned compare expectedReturned match {
     case (false, _, _) =>

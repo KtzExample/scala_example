@@ -9,10 +9,10 @@ object LetReview extends App{
   def readString(nOfInput: Int): Unit =
     if(nOfInput == 0) return
     else {
-      val (even, odd) = splitString(io.StdIn.readLine())
+      val (even, odd) = splitString(scala.io.StdIn.readLine())
       println(s"$odd $even")
       readString(nOfInput - 1)
     }
 
-  readString(io.StdIn.readInt())
+  readString(scala.io.StdIn.readInt())
 }

@@ -8,8 +8,8 @@ object PrefixCompression {
 
 
   def readInput(): (String, String) = {
-    val input1 = io.StdIn.readLine()
-    val input2 = io.StdIn.readLine()
+    val input1 = scala.io.StdIn.readLine()
+    val input2 = scala.io.StdIn.readLine()
     (input1, input2)
   }
 

@@ -31,9 +31,9 @@ object SequenceFullOfColors {
   @tailrec
   def getInput(n: Int, acc: List[Boolean] = List.empty): List[Boolean] =
     if(n == 0) acc
-    else getInput(n - 1, acc :+ scanString(io.StdIn.readLine().toList))
+    else getInput(n - 1, acc :+ scanString(scala.io.StdIn.readLine().toList))
 
   def main(args: Array[String]): Unit = {
-    getInput(io.StdIn.readInt()).foreach(result => println(result.toString.capitalize))
+    getInput(scala.io.StdIn.readInt()).foreach(result => println(result.toString.capitalize))
   }
 }
