@@ -1,8 +1,12 @@
 package org.example.ktz.cats
 
+import java.time.Instant
+
 import cats.Semigroupal
 
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
 
 object LiveCodeMonad extends App {
 
@@ -23,5 +27,17 @@ object LiveCodeMonad extends App {
   import cats.instances.option._
 
   println(Semigroupal.tuple3(Option(1), Option(true), Option(3)))
+
+  import cats.implicits._
+  def getFInt(a: Int): Future[Int] = Future {
+    Thread.sleep(a * 1000)
+    println(Instant.now.toString)
+    a
+  }
+
+  Await.result((getFInt(3), getFInt(5)).mapN((a, b) => {
+    println(a + b)
+    a + b
+  }), Duration.Inf)
 
 }
