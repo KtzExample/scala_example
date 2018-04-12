@@ -22,9 +22,12 @@ libraryDependencies ++= {
     "io.catbird" %% "catbird-util" % twitterV,
     "com.github.julien-truffaut" %%  "monocle-core"  % "1.5.0-cats",
     "com.github.julien-truffaut" %%  "monocle-macro" % "1.5.0-cats",
-    "com.github.julien-truffaut" %%  "monocle-law"   % "1.5.0-cats" % "test"
+    "com.github.julien-truffaut" %%  "monocle-law"   % "1.5.0-cats" % "test",
+    "org.specs2" %% "specs2-core" % "4.0.2" % "test"
   )
 }
+
+scalacOptions in Test ++= Seq("-Yrangepos")
 
 addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
 
