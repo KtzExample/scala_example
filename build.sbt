@@ -23,7 +23,8 @@ libraryDependencies ++= {
     "com.github.julien-truffaut" %%  "monocle-core"  % "1.5.0-cats",
     "com.github.julien-truffaut" %%  "monocle-macro" % "1.5.0-cats",
     "com.github.julien-truffaut" %%  "monocle-law"   % "1.5.0-cats" % "test",
-    "org.specs2" %% "specs2-core" % "4.0.2" % "test"
+    "org.specs2" %% "specs2-core" % "4.0.2" % "test",
+    "org.scalacheck" %% "scalacheck" % "1.14.0" % "test"
   )
 }
 
